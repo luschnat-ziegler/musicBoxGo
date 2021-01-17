@@ -1,7 +1,6 @@
 package app
 
 import (
-	"encoding/json"
 	"fmt"
 	"net/http"
 )
@@ -26,13 +25,4 @@ func (uh *UploadHandlers) uploadFiles (w http.ResponseWriter, r *http.Request) {
 	}{true}
 
 	writeResponse(w, http.StatusOK, response)
-
-}
-
-func writeResponse(w http.ResponseWriter, code int, data interface{}) {
-	w.Header().Add("Content-Type", "application/json")
-	w.WriteHeader(code)
-	if err := json.NewEncoder(w).Encode(data); err != nil {
-		panic(err)
-	}
 }
