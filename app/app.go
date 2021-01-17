@@ -15,8 +15,10 @@ func Start() {
 	router := mux.NewRouter()
 
 	uh := UploadHandlers{}
+	mh := MpdHandlers{}
 
 	router.HandleFunc("/upload", uh.uploadFiles).Methods(http.MethodPost)
+	router.HandleFunc("/mpdupdate" , mh.updateDB).Methods(http.MethodGet)
 
 	handler := cors.Default().Handler(router)
 	log.Fatal(http.ListenAndServe(":8000", handler))
